@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
 import getStyles from './styles'
 
 class NotesGrid extends React.Component {
@@ -6,11 +8,22 @@ class NotesGrid extends React.Component {
     const styles = getStyles()
 
     return (
-      <div>
-        NotesGrid
-      </div>
+      <ul>
+        {this.props.notesGrid.map((note, index) => {
+          return <li key={index}>{note}</li>
+        })}
+      </ul>
     )
   }
 }
 
-export default NotesGrid
+NotesGrid.propTypes = {
+  notesGrid: React.PropTypes.array
+}
+
+export default connect(
+  state => ({
+    notesGrid: state
+  }),
+  dispatch => ({})
+)(NotesGrid)
