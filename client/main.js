@@ -5,10 +5,11 @@ import { createStore } from 'redux'
 
 import App from './components/App'
 
-const initialState = [
-  'First note',
-  'Second note'
-]
+const initialState = {
+  titleTextFirst: 'First note',
+  titleTextSecond: 'Second note',
+  notes: [ 1, 2 ]
+}
 
 const Note = (state = initialState, action) => {
   if (action.type === 'ADD_NOTE') {

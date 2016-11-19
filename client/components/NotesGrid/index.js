@@ -9,7 +9,7 @@ class NotesGrid extends React.Component {
 
     return (
       <ul>
-        {this.props.notesGrid.map((note, index) => {
+        {this.props.notes.map((note, index) => {
           return <li key={index}>{note}</li>
         })}
       </ul>
@@ -18,12 +18,12 @@ class NotesGrid extends React.Component {
 }
 
 NotesGrid.propTypes = {
-  notesGrid: React.PropTypes.array
+  notes: React.PropTypes.array
 }
 
 export default connect(
   state => ({
-    notesGrid: state
+    notes: state.notes
   }),
   dispatch => ({})
 )(NotesGrid)
