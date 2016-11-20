@@ -29,13 +29,14 @@ class App extends React.Component {
   // }
 
   render () {
+    console.log(this.props.notes)
     return (
       <div>
         <Title text={this.props.titleTextFirst} strong />
         <Title text={this.props.titleTextSecond} />
         <Note />
         <NotesGrid />
-        <NotesEditor />
+        <NotesEditor notes={this.props.notes} />
       </div>
     )
   }
@@ -43,13 +44,15 @@ class App extends React.Component {
 
 App.propTypes = {
   titleTextFirst: React.PropTypes.string,
-  titleTextSecond: React.PropTypes.string
+  titleTextSecond: React.PropTypes.string,
+  notes: React.PropTypes.array
 }
 
 export default connect(
   state => ({
     titleTextFirst: state.titleTextFirst,
-    titleTextSecond: state.titleTextSecond
+    titleTextSecond: state.titleTextSecond,
+    notes: React.PropTypes.array
   }),
   dispatch => ({})
 )(App)

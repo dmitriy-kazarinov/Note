@@ -12,13 +12,15 @@ const initialState = {
 }
 
 const Note = (state = initialState, action) => {
-  if (action.type === 'ADD_NOTE') {
-    return [
-      ...state,
-      action
-    ]
+  switch (action.type) {
+    case 'ADD_NOTE':
+      return [
+        ...state,
+        action.title
+      ]
+    default:
+      return state
   }
-  return state
 }
 
 const store = createStore(Note)
