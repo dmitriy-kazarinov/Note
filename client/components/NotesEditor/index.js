@@ -5,9 +5,9 @@ import getStyles from './styles'
 
 class NotesEditor extends React.Component {
 
-  _handleSubmit(event) {
+  clearEdit(event) {
     event.preventDefault()
-    this.newNote.value = ''
+    this.noteTitle.value = ''
   }
 
   render () {
@@ -15,7 +15,8 @@ class NotesEditor extends React.Component {
 
     return (
       <div>
-        <input ref={text => this.newNote = text} />
+        <input type='text' ref={title => this.noteTitle = title} />
+        <button onClick={this.clearEdit.bind(this)}>Clear</button>
       </div>
     )
   }
