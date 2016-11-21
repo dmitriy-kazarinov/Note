@@ -5,30 +5,31 @@ import { createStore } from 'redux'
 
 import App from './components/App'
 
-const initialState = {
-  titleTextFirst: 'First note',
-  titleTextSecond: 'Second note',
-  notes: [ 1, 2 ]
-}
+const initialState = [{
+  title: 'title1',
+  text: 'text1'
+}]
 
-const Note = (state = initialState, action) => {
+const Notes = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_NOTE':
       return [
         ...state,
-        action.title
+        {
+          title: action.data.title,
+          text: action.data.text
+        }
       ]
     default:
       return state
   }
 }
 
-const store = createStore(Note)
+const store = createStore(Notes)
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
-  </Provider>
-  ,
+  </Provider>,
    document.getElementById('app')
 )

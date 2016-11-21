@@ -1,9 +1,16 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 
 import getStyles from './styles'
 
-class NotesEditor extends React.Component {
+function addNote (data) {
+  return {
+    type: 'ADD_NOTE',
+    data
+  }
+}
+
+class NotesEditor extends Component {
 
   constructor (props) {
     super(props)
@@ -24,6 +31,10 @@ class NotesEditor extends React.Component {
 
   clearEdit (event) {
     event.preventDefault()
+    this.willEmptyData()
+  }
+
+  willEmptyData () {
     this.setState({
       title: '',
       text: ''
@@ -37,8 +48,10 @@ class NotesEditor extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault()
-    console.log(this.state)
+    this.props.addNote(this.state)
+    this.willEmptyData()
   }
+
   handleTitle (event) {
     this.setState({title: event.target.value})
   }
@@ -82,12 +95,17 @@ class NotesEditor extends React.Component {
 }
 
 NotesEditor.propTypes = {
-  state: React.PropTypes.object
+  state: PropTypes.array.isRequired,
+  addNote: PropTypes.func.isRequired
+}
+
+NotesEditor.contextTypes = {
+  store: PropTypes.object
 }
 
 export default connect(
   state => ({
     state
   }),
-  dispatch => ({})
+  {addNote}
 )(NotesEditor)
