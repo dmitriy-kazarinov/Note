@@ -1,31 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
+import logger from 'redux-logger'
 
 import App from './components/App'
+import Notes from './reducers/notesReducers'
 
-const initialState = [{
-  title: 'title1',
-  text: 'text1'
-}]
-
-const Notes = (state = initialState, action) => {
-  switch (action.type) {
-    case 'ADD_NOTE':
-      return [
-        ...state,
-        {
-          title: action.data.title,
-          text: action.data.text
-        }
-      ]
-    default:
-      return state
-  }
-}
-
-const store = createStore(Notes)
+const middleware = applyMiddleware(logger())
+const store = createStore(Notes, middleware)
 
 ReactDOM.render(
   <Provider store={store}>

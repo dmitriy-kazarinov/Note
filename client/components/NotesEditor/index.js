@@ -2,13 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 
 import getStyles from './styles'
-
-function addNote (data) {
-  return {
-    type: 'ADD_NOTE',
-    data
-  }
-}
+import { addNote } from '../../actions/notesActions'
 
 class NotesEditor extends Component {
 
@@ -85,10 +79,10 @@ class NotesEditor extends Component {
     }
     return (
       <div>
+        {editor}
         <button onClick={this.toggleEdit}>{
           this.state.isOpenEditor ? 'Close' : 'Open'
         }</button>
-        {editor}
       </div>
     )
   }
