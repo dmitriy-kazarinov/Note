@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {Component, PropTypes} from 'react'
+import { connect } from 'react-redux'
+
 import getStyles from './styles'
 
-class Note extends React.Component {
+class Note extends Component {
   render () {
     const styles = getStyles()
 
@@ -13,4 +15,13 @@ class Note extends React.Component {
   }
 }
 
-export default Note
+Note.propTypes = {
+  state: PropTypes.array.isRequired
+}
+
+export default connect(
+  state => ({
+    state
+  }),
+  dispatch => ({})
+)(Note)
