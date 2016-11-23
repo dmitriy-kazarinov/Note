@@ -8,6 +8,11 @@ export default function Notes (state = [], action) {
           text: action.data.text
         }
       ]
+    case 'DELETE_NOTE':
+      return [
+        ...state.slice(0, action.index),
+        ...state.slice(action.index + 1)
+      ]
     default:
       return state
   }

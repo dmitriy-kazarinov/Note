@@ -2,18 +2,17 @@ import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 
 import Title from './Title'
-import Note from './Note'
 import NotesGrid from './NotesGrid'
 import NotesEditor from './NotesEditor'
+
+const title = 'Note motivation'
 
 class App extends Component {
 
   render () {
     return (
       <div>
-        <Title text='test1' strong />
-        <Title text='test2' />
-        <Note />
+        <Title text={title} strong />
         <NotesGrid />
         <NotesEditor />
       </div>
