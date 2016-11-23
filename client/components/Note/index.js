@@ -13,7 +13,7 @@ class Note extends Component {
 
   removeNote (event) {
     event.preventDefault()
-    this.props.deleteNote(this.props.item)
+    this.props.deleteNote(this.props.index)
   }
 
   render () {
@@ -21,7 +21,7 @@ class Note extends Component {
 
     return (
         <li>
-          {this.props.data.text}
+          {this.props.note.text}
           <button onClick={this.removeNote}>
             del
           </button>
@@ -32,9 +32,9 @@ class Note extends Component {
 
 Note.propTypes = {
   state: PropTypes.array.isRequired,
-  data: PropTypes.object.isRequired,
+  note: PropTypes.object.isRequired,
   deleteNote: PropTypes.func.isRequired,
-  item: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired
 }
 
 Note.contextTypes = {

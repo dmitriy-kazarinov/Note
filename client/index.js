@@ -4,8 +4,8 @@ import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'
 import logger from 'redux-logger'
 
-import App from './components/App'
-import Notes from './reducers/notes'
+import App from 'components/App'
+import Notes from 'reducers/notes'
 
 const middleware = applyMiddleware(logger())
 const store = createStore(Notes, middleware)
