@@ -13,7 +13,7 @@ module.exports = {
     ]
   },
   output: {
-    path: `${__dirname}`,
+    path: ROOT_DIR,
     publicPath: 'build/',
     filename: 'index.js'
   },

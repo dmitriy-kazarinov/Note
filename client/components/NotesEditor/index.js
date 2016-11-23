@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 
 import getStyles from './styles'
-import { addNote } from '../../actions/notes'
+import { addNote } from 'actions/notes'
 
 class NotesEditor extends Component {
 
