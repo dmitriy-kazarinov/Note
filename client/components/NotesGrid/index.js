@@ -7,6 +7,7 @@ import Note from 'components/Note'
 class NotesGrid extends Component {
   render () {
     const styles = getStyles()
+
     return (
       <ul>
         {this.props.state.map((note, index) => {

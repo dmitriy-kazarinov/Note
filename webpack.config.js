@@ -1,10 +1,12 @@
 const path = require('path')
+const webpack = require('webpack')
+const pj = path.join
 const ROOT_DIR = __dirname
-const SRC_DIR = path.join(ROOT_DIR, 'client')
-const DEST_DIR = path.join(ROOT_DIR, 'public', 'build')
-const NODE_MODULES_DIR = path.join(ROOT_DIR, 'node_modules')
+const SRC_DIR = pj(ROOT_DIR, 'client')
+const DEST_DIR = pj(ROOT_DIR, 'public', 'build')
+const NODE_MODULES_DIR = pj(ROOT_DIR, 'node_modules')
 
-module.exports = {
+const config = {
   context: SRC_DIR,
   entry: {
     index: [
@@ -13,9 +15,9 @@ module.exports = {
     ]
   },
   output: {
-    path: ROOT_DIR,
+    path: DEST_DIR,
     publicPath: 'build/',
-    filename: 'index.js'
+    filename: '[name].js'
   },
   module: {
     loaders: [
@@ -58,5 +60,13 @@ module.exports = {
     root: SRC_DIR,
     extensions: ['', '.js'],
     modulesDirectories: [NODE_MODULES_DIR]
-  }
+  },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.ProvidePlugin({
+      'Promise': 'imports?this=>global!exports?global.Promise!es6-promise'
+    })
+  ]
 }
+
+module.exports = config
