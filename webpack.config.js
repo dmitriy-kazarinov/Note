@@ -1,22 +1,22 @@
 const path = require('path')
 const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const pj = path.join
 const ROOT_DIR = __dirname
 const SRC_DIR = pj(ROOT_DIR, 'client')
-const DEST_DIR = pj(ROOT_DIR, 'public', 'build')
+const DEST_DIR = pj(ROOT_DIR, 'public')
 const NODE_MODULES_DIR = pj(ROOT_DIR, 'node_modules')
 
 const config = {
   context: SRC_DIR,
   entry: {
     index: [
-      'babel-polyfill',
       'index.js'
     ]
   },
   output: {
     path: DEST_DIR,
-    publicPath: 'build/',
+    publicPath: '/',
     filename: '[name].js'
   },
   module: {
@@ -24,10 +24,7 @@ const config = {
       {
         test: /\.js$/,
         loader: 'babel',
-        exclude: [/node_modules/, /public/],
-        query: {
-          presets: ['react']
-        }
+        exclude: [/node_modules/, /public/]
       },
       {
         test: /\.gif$/,
@@ -62,6 +59,9 @@ const config = {
     modulesDirectories: [NODE_MODULES_DIR]
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: pj(SRC_DIR, 'index.ejs')
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.ProvidePlugin({
       'Promise': 'imports?this=>global!exports?global.Promise!es6-promise'
