@@ -11,3 +11,10 @@ export function deleteNote (index) {
     index
   }
 }
+
+export function loadNotes (data) {
+  return {
+    type: 'LOAD_NOTES',
+    data
+  }
+}
