@@ -13,12 +13,14 @@ export function listNotes () {
   return Note.find()
 }
 
-export function createNote (data) {
+export function createNote (data = {}) {
+  console.log(data)
+  const empty = ''
   const note = new Note({
-    title: data.title,
-    text: data.text,
-    color: data.color,
-    date: data.date
+    title: data.title || empty,
+    text: data.text || empty,
+    color: data.color || empty,
+    date: data.date || empty
   })
 
   return note.save()

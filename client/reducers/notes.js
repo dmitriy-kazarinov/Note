@@ -13,6 +13,12 @@ export default function Notes (state = [], action) {
         ...state.slice(0, action.index),
         ...state.slice(action.index + 1)
       ]
+    case 'LOAD_NOTES':
+      console.log(action.data)
+      return [
+        ...state,
+        ...action.data
+      ]
     default:
       return state
   }
