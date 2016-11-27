@@ -44,7 +44,7 @@ server.get('/api/notes', (req, res) => {
 })
 
 server.post('/api/notes', (req, res) => {
-  db.createNote().then(data => res.send(data))
+  db.createNote(req.body).then(data => res.send(data))
 })
 
 server.delete('/api/notes/:id', (req, res) => {

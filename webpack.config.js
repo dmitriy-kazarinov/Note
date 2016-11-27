@@ -55,7 +55,7 @@ const config = {
   },
   resolve: {
     root: SRC_DIR,
-    extensions: ['', '.js'],
+    extensions: ['', '.js', '.jsx'],
     modulesDirectories: [NODE_MODULES_DIR]
   },
   plugins: [
