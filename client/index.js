@@ -3,16 +3,22 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'
 import logger from 'redux-logger'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import App from 'components/App'
 import Notes from 'reducers/notes'
+
+injectTapEventPlugin()
 
 const middleware = applyMiddleware(logger())
 const store = createStore(Notes, middleware)
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <MuiThemeProvider>
+      <App />
+    </MuiThemeProvider>
   </Provider>,
    document.getElementById('app')
 )
