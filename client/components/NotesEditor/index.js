@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 // import axios from 'axios'
+import RaisedButton from 'material-ui/RaisedButton'
 
 import getStyles from './styles'
 import { addNote } from 'actions/notes'
@@ -48,11 +49,9 @@ class NotesEditor extends Component {
     axios.post('/api/notes', {
       title: this.state.title,
       text: this.state.text
-    })
-    .then((response) => {
+    }).then((response) => {
       console.log(response)
-    })
-    .catch((error) => {
+    }).catch((error) => {
       console.log(error)
     })
     this.willEmptyData()
@@ -92,9 +91,10 @@ class NotesEditor extends Component {
     return (
       <div>
         {editor}
-        <button onClick={this.toggleEdit}>{
-          this.state.isOpenEditor ? 'Close' : 'Open'
-        }</button>
+        <RaisedButton
+          label={this.state.isOpenEditor ? 'Close' : 'Open'}
+          onClick={this.toggleEdit}
+        />
       </div>
     )
   }
