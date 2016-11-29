@@ -1,8 +1,10 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 const pj = path.join
-const ROOT_DIR = __dirname
+const ROOT_DIR = path.resolve(__dirname)
+const PUBLIC_PATH = process.env.PUBLIC_PATH || '/'
 const SRC_DIR = pj(ROOT_DIR, 'client')
 const DEST_DIR = pj(ROOT_DIR, 'public')
 const NODE_MODULES_DIR = pj(ROOT_DIR, 'node_modules')
@@ -16,14 +18,14 @@ const config = {
   },
   output: {
     path: DEST_DIR,
-    publicPath: '/',
+    publicPath: PUBLIC_PATH,
     filename: '[name].js'
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: [/node_modules/, /public/]
       },
       {
@@ -43,18 +45,17 @@ const config = {
         loader: 'url-loader?limit=26000&mimetype=image/svg+xml'
       },
       {
-        test: /\.jsx$/,
-        loader: 'react-hot!babel',
-        exclude: [/node_modules/, /public/]
-      },
-      {
         test: /\.json$/,
         loader: 'json-loader'
+      },
+      {
+        test: /\.(woff|woff2|swf|ttf|eot)$/i,
+        loader: 'file-loader?name=fonts/[name].[ext]'
       }
     ]
   },
   resolve: {
-    root: SRC_DIR,
+    root: [SRC_DIR, NODE_MODULES_DIR],
     extensions: ['', '.js', '.jsx'],
     modulesDirectories: [NODE_MODULES_DIR]
   },
@@ -66,7 +67,10 @@ const config = {
     new webpack.ProvidePlugin({
       'Promise': 'imports?this=>global!exports?global.Promise!es6-promise'
     })
-  ]
+  ],
+  watch: true,
+  debug: true,
+  devtool: 'inline-source-map'
 }
 
 module.exports = config

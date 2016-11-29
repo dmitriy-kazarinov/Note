@@ -15,17 +15,24 @@ class App extends Component {
 
   componentDidMount () {
     // TODO
-    fetch('/api/notes').then((response) => {
-      if (response.status !== 200) {
-        console.log(`Looks like there was a problem. Status Code: ${response.status}`)
-        return
-      }
-      response.json().then((data) => {
-        this.props.loadNotes(data)
-      })
-    }).catch((err) => {
-      console.log('Fetch Error :-S', err)
+    axios.get('/api/notes')
+    .then((response) => {
+      this.props.loadNotes(response.data)
     })
+    .catch((error) => {
+      console.log(error)
+    })
+    // fetch('/api/notes').then((response) => {
+    //   if (response.status !== 200) {
+    //     console.log(`Looks like there was a problem. Status Code: ${response.status}`)
+    //     return
+    //   }
+    //   response.json().then((data) => {
+    //     this.props.loadNotes(data)
+    //   })
+    // }).catch((err) => {
+    //   console.log('Fetch Error :-S', err)
+    // })
   }
 
   render () {
