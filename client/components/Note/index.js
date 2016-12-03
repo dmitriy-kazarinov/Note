@@ -20,12 +20,12 @@ class Note extends Component {
     const styles = getStyles()
 
     return (
-        <li>
+        <div>
           {this.props.note.text}
           <button onClick={this.removeNote}>
             del
           </button>
-        </li>
+        </div>
     )
   }
 }
