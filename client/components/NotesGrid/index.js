@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
+import {List, ListItem} from 'material-ui/List';
 
 import getStyles from './styles'
 import Note from 'components/Note'
@@ -9,11 +10,13 @@ class NotesGrid extends Component {
     const styles = getStyles()
 
     return (
-      <ul>
-        {this.props.state.map((note, index) => {
-          return <Note key={index} note={note} index={index} />
-        })}
-      </ul>
+      <div>
+        <List>
+          {this.props.state.map((note, index) => {
+            return <ListItem key={index}><Note note={note} index={index} /></ListItem>
+          })}
+        </List>
+      </div>
     )
   }
 }
