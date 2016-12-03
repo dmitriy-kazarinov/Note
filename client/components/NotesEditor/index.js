@@ -1,9 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
-import Divider from 'material-ui/Divider'
-import Paper from 'material-ui/Paper'
-import TextField from 'material-ui/TextField'
 
 import getStyles from './styles'
 import { addNote } from 'actions/notes'
