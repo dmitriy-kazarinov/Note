@@ -1,9 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton'
-import Divider from 'material-ui/Divider'
-import Paper from 'material-ui/Paper'
-import TextField from 'material-ui/TextField'
 
 import getStyles from './styles'
 import { addNote } from 'actions/notes'
@@ -46,17 +43,17 @@ class NotesEditor extends Component {
 
   handleSubmit (event) {
     event.preventDefault()
-    this.props.addNote(this.state)
     // TODO
     axios.post('/api/notes', {
       title: this.state.title,
       text: this.state.text
     }).then((response) => {
       console.log(response)
+      this.props.addNote(this.state)
+      this.willEmptyData()
     }).catch((error) => {
       console.log(error)
     })
-    this.willEmptyData()
   }
 
   handleTitle (event) {

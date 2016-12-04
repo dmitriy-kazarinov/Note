@@ -48,7 +48,8 @@ server.post('/api/notes', (req, res) => {
 })
 
 server.delete('/api/note/:id', (req, res) => {
-
+  console.log(1)
+  db.deleteNote(req.body).then(data => res.send(data))
 })
 
 server.listen(PORT, HOSTNAME, (err) => {
