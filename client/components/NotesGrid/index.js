@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
-import {List, ListItem} from 'material-ui/List'
+import StackGrid from 'react-stack-grid'
 
 import getStyles from './styles'
 import Note from 'components/Note'
@@ -11,11 +11,11 @@ class NotesGrid extends Component {
 
     return (
       <div>
-        <List>
+        <StackGrid columnWidth={200}>
           {this.props.state.map((note, index) => {
-            return <ListItem key={index}><Note note={note} index={index} /></ListItem>
+            return <Note key={index} note={note} index={index} />
           })}
-        </List>
+        </StackGrid>
       </div>
     )
   }

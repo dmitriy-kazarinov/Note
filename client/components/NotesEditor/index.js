@@ -43,17 +43,17 @@ class NotesEditor extends Component {
 
   handleSubmit (event) {
     event.preventDefault()
-    this.props.addNote(this.state)
     // TODO
     axios.post('/api/notes', {
       title: this.state.title,
       text: this.state.text
     }).then((response) => {
       console.log(response)
+      this.props.addNote(this.state)
+      this.willEmptyData()
     }).catch((error) => {
       console.log(error)
     })
-    this.willEmptyData()
   }
 
   handleTitle (event) {

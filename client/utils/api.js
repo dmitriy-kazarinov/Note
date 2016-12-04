@@ -1,4 +1,3 @@
-
 export function getNotes () {
   fetch('/api/notes').then((response) => {
     if (response.status !== 200) {
@@ -27,4 +26,15 @@ export function sendNote (state) {
       console.log('Request failure: ', error)
     })
   })
+}
+
+export function deleteNote () {
+  fetch(`/api/note/${this.props.note._id}`, {
+    method: 'delete'
+  }).then(response =>
+    response.json().then(json => {
+      this.props.deleteNote(this.props.index)
+      return json
+    })
+  )
 }

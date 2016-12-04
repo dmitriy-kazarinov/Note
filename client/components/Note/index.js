@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 
+import { ListItem } from 'material-ui/List'
+
 import getStyles from './styles'
 import { deleteNote } from 'actions/notes'
 
@@ -13,19 +15,28 @@ class Note extends Component {
 
   removeNote (event) {
     event.preventDefault()
-    this.props.deleteNote(this.props.index)
+    axios.delete(`/api/note/${this.props.note._id}`)
+    .then((response) => {
+      this.props.deleteNote(this.props.index)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   }
 
   render () {
     const styles = getStyles()
 
     return (
-        <div>
-          {this.props.note.text}
+        <ListItem>
+          <div>
+            <div>{this.props.note.title}</div>
+            <div>{this.props.note.text}</div>
+          </div>
           <button onClick={this.removeNote}>
             del
           </button>
-        </div>
+        </ListItem>
     )
   }
 }
