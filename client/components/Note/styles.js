@@ -1,7 +1,16 @@
 export default function () {
   return {
-    titleBold: {
-      fontWeight: 'bold'
+    paper: {
+      height: 'auto',
+      width: '100%',
+      padding: 20,
+      textAlign: 'left',
+      display: 'inline-block'
+    },
+    paperTitle: {
+      textAlign: 'center',
+      fontWeight: 'bold',
+      marginBottom: '10px'
     }
   }
 }
