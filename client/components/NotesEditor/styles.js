@@ -3,8 +3,8 @@ export default function () {
     titleBold: {
       fontWeight: 'bold'
     },
-    textField: {
-      marginLeft: 20
+    openBtn: {
+      margin: '10px 0'
     }
   }
 }

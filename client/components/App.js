@@ -28,8 +28,8 @@ class App extends Component {
     return (
       <div>
         <Title text={title} strong />
-        <NotesGrid />
         <NotesEditor />
+        <NotesGrid />
       </div>
     )
   }
