@@ -1,7 +1,9 @@
 export default function () {
   return {
     titleBold: {
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      textAlign: 'center',
+      marginTop: 10
     }
   }
 }

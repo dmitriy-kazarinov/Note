@@ -143,7 +143,7 @@ class NotesEditor extends Component {
                 multiLine
               />
             </div>
-            
+
             <button>Save</button>
             <button onClick={this.clearEdit}>Clear</button>
           </form>
@@ -154,8 +154,10 @@ class NotesEditor extends Component {
       <div>
         {editor}
         <RaisedButton
-          label={this.state.isOpenEditor ? 'Close' : 'Open'}
+          label={this.state.isOpenEditor ? 'Close editor' : 'Take a note'}
           onClick={this.toggleEdit}
+          fullWidth={true}
+          style={styles.openBtn}
         />
       </div>
     )
