@@ -40,15 +40,33 @@ server.use(webpackHotMiddleware(compiler))
 server.use(bodyParser.json())
 
 server.get('/api/notes', (req, res) => {
-  db.listNotes().then(data => res.send(data))
+  db.listNotes().then(data => {
+    res.send(data)
+  }).catch((err) => {
+    console.error(err)
+    if (err.reason === undefined)
+      res.status(404).send(err.message)
+  })
 })
 
 server.post('/api/notes', (req, res) => {
-  db.createNote(req.body).then(data => res.send(data))
+  db.createNote(req.body).then(data => {
+    res.send(data)
+  }).catch((err) => {
+    console.error(err)
+    if (err.name === 'ValidationError')
+      res.status(400).send(err.message)
+  })
 })
 
 server.delete('/api/note/:id', (req, res) => {
-  db.deleteNote(req.params.id).then(data => res.send(data))
+  db.deleteNote(req.params.id).then(data => {
+    res.send(data)
+  }).catch((err) => {
+    console.error(err);
+    if (err.reason === undefined)
+      res.status(404).send(err.message)
+  })
 })
 
 server.listen(PORT, HOSTNAME, (err) => {

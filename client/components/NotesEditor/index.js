@@ -71,6 +71,7 @@ class NotesEditor extends Component {
 
   handleSubmit (event) {
     event.preventDefault()
+    console.log(this.state.date);
     // TODO
     axios.post('/api/notes', {
       title: this.state.title,
@@ -78,10 +79,12 @@ class NotesEditor extends Component {
       color: this.state.color,
       date: this.state.date
     }).then((response) => {
+      // TODO
+      // state.date = new Date(state.date).toString()
       this.props.addNote(this.state)
       this.willEmptyData()
-    }).catch((error) => {
-      console.log(error)
+    }).catch((err) => {
+      console.error(err)
     })
   }
 
