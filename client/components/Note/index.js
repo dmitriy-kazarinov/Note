@@ -21,8 +21,8 @@ class Note extends Component {
     .then((response) => {
       this.props.deleteNote(this.props.index)
     })
-    .catch((error) => {
-      console.log(error)
+    .catch((err) => {
+      console.error(err)
     })
   }
 

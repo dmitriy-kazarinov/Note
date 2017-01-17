@@ -19,8 +19,8 @@ class App extends Component {
     .then((response) => {
       this.props.loadNotes(response.data)
     })
-    .catch((error) => {
-      console.log(error)
+    .catch((err) => {
+      console.error(err)
     })
   }
 

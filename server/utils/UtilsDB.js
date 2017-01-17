@@ -14,7 +14,6 @@ export function listNotes () {
 }
 
 export function createNote (data = {}) {
-  console.log(data)
   const empty = ''
   const note = new Note({
     title: data.title || empty,

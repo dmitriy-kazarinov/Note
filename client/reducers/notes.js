@@ -5,7 +5,9 @@ export default function Notes (state = [], action) {
         ...state,
         {
           title: action.data.title,
-          text: action.data.text
+          text: action.data.text,
+          color: action.data.color,
+          date: action.data.date
         }
       ]
     case 'DELETE_NOTE':
@@ -14,7 +16,6 @@ export default function Notes (state = [], action) {
         ...state.slice(action.index + 1)
       ]
     case 'LOAD_NOTES':
-      console.log(action.data)
       return [
         ...state,
         ...action.data
