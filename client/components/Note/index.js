@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
@@ -26,17 +27,22 @@ class Note extends Component {
     })
   }
 
+  componentWillMount() {
+    this.props.note.date = moment(this.props.note.date).format('L')  
+  }
+
   render () {
     const styles = getStyles()
 
     return (
       <Paper style={styles.paper} zDepth={2} circle={false}>
-        <div>
-          <div style={styles.paperTitle}>{this.props.note.title}</div>
-          <div>{this.props.note.text}</div>
-          <div>{this.props.note.date}</div>
-          <div>{this.props.note.color}</div>
-        </div>
+        <div style={styles.paperTitle}>{this.props.note.title}</div>
+        <Divider />
+        <div>{this.props.note.text}</div>
+        <Divider />
+        <div>{this.props.note.date}</div>
+        <Divider />
+        <div>{this.props.note.color}</div>
         <Divider />
         <button onClick={this.removeNote}>
           del

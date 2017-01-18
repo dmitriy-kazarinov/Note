@@ -6,6 +6,7 @@ import DatePicker from 'material-ui/DatePicker';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
+import Drawer from 'material-ui/Drawer';
 
 import getStyles from './styles'
 import { addNote } from 'actions/notes'
@@ -27,6 +28,7 @@ const COLORS = [
     key: '#ca0101'
   }
 ]
+const DRAWER_WIDTH = 285
 
 class NotesEditor extends Component {
 
@@ -57,6 +59,7 @@ class NotesEditor extends Component {
 
   willEmptyData () {
     this.setState({
+      isOpenEditor: false,
       title: '',
       text: '',
       color: SELECTED_COLOR,
@@ -69,9 +72,7 @@ class NotesEditor extends Component {
     this.setState({isOpenEditor: !this.state.isOpenEditor})
   }
 
-  handleSubmit (event) {
-    event.preventDefault()
-    console.log(this.state.date);
+  handleSubmit () {
     // TODO
     axios.post('/api/notes', {
       title: this.state.title,
@@ -79,8 +80,6 @@ class NotesEditor extends Component {
       color: this.state.color,
       date: this.state.date
     }).then((response) => {
-      // TODO
-      // state.date = new Date(state.date).toString()
       this.props.addNote(this.state)
       this.willEmptyData()
     }).catch((err) => {
@@ -107,61 +106,70 @@ class NotesEditor extends Component {
   render () {
     const styles = getStyles()
 
-    let editor
-    if (this.state.isOpenEditor) {
-      editor = (
-        <div>
-          <form onSubmit={this.handleSubmit}>
-             <TextField
-              hintText="Write title"
-              value={this.state.title}
-              onChange={this.handleTitle}
-            />
-            <DatePicker
-              hintText="Add date"
-              container="inline"
-              mode="landscape"
-              minDate={MIN_DATA}
-              value={this.state.date}
-              onChange={this.handleDate}
-            />
-            <SelectField
-              floatingLabelText="Add color"
-              value={this.state.color}
-              onChange={this.handleColor}
-            >
-              {COLORS.map((color, index) => {
-                return <MenuItem
-                        key={index}
-                        value={color.key}
-                        primaryText={color.name}
-                      />
-              })}
-            </SelectField>
-            <div>
-              <TextField
-                hintText="Write text"
-                value={this.state.text}
-                onChange={this.handleText}
-                multiLine
-              />
-            </div>
-
-            <button>Save</button>
-            <button onClick={this.clearEdit}>Clear</button>
-          </form>
-        </div>
-      )
-    }
     return (
       <div>
-        {editor}
         <RaisedButton
           label={this.state.isOpenEditor ? 'Close editor' : 'Take a note'}
           onClick={this.toggleEdit}
-          fullWidth={true}
           style={styles.openBtn}
         />
+        <Drawer
+          docked={false}
+          width={DRAWER_WIDTH}
+          open={this.state.isOpenEditor}
+          onRequestChange={(isOpenEditor) => this.setState({isOpenEditor})}
+        >
+          <div style={styles.formWrapper}>
+           <div style={styles.formTitle}>Create a note</div>
+            <form onSubmit={this.handleSubmit}>
+               <TextField
+                hintText="Write title"
+                value={this.state.title}
+                onChange={this.handleTitle}
+              />
+              <DatePicker
+                hintText="Add date"
+                mode="landscape"
+                minDate={MIN_DATA}
+                value={this.state.date}
+                onChange={this.handleDate}
+              />
+              <SelectField
+                floatingLabelText="Add color"
+                value={this.state.color}
+                onChange={this.handleColor}
+              >
+                {COLORS.map((color, index) => {
+                  return <MenuItem
+                          key={index}
+                          value={color.key}
+                          primaryText={color.name}
+                        />
+                })}
+              </SelectField>
+              <div>
+                <TextField
+                  hintText="Write text"
+                  value={this.state.text}
+                  onChange={this.handleText}
+                  multiLine
+                />
+              </div>
+
+              <RaisedButton
+                label="Save"
+                primary
+                onClick={this.handleSubmit}
+                style={styles.submitBtn}
+              />
+              <RaisedButton
+                label="Clear"
+                secondary
+                onClick={this.clearEdit}
+              />
+            </form>
+          </div>
+        </Drawer>
       </div>
     )
   }
