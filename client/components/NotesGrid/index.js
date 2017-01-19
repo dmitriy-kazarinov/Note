@@ -11,7 +11,11 @@ class NotesGrid extends Component {
 
     return (
       <div>
-        <StackGrid columnWidth={200}>
+        <StackGrid
+          columnWidth={250}
+          gutterWidth={20}
+          gutterHeight={20}
+        >
           {this.props.state.map((note, index) => {
             return <Note key={index} note={note} index={index} />
           })}

@@ -7,25 +7,28 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
 import Drawer from 'material-ui/Drawer';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+
 
 import getStyles from './styles'
 import { addNote } from 'actions/notes'
 
 // TODO move to const file
 const MIN_DATA = new Date();
-const SELECTED_COLOR = '#00bb00';
+const SELECTED_COLOR = '#beffd0';
 const COLORS = [
   {
     name: 'Green',
-    key: '#00bb00'
+    key: '#beffd0'
   },
   {
     name: 'Yellow',
-    key: '#baca01'
+    key: '#fff5be'
   },
   {
     name: 'Red',
-    key: '#ca0101'
+    key: '#ffbebe'
   }
 ]
 const DRAWER_WIDTH = 285
@@ -108,11 +111,14 @@ class NotesEditor extends Component {
 
     return (
       <div>
-        <RaisedButton
-          label={this.state.isOpenEditor ? 'Close editor' : 'Take a note'}
-          onClick={this.toggleEdit}
-          style={styles.openBtn}
-        />
+        <div style={styles.centered}>
+          <FloatingActionButton
+            onClick={this.toggleEdit}
+            style={styles.openBtn}
+          >
+            <ContentAdd />
+          </FloatingActionButton>
+        </div>
         <Drawer
           docked={false}
           width={DRAWER_WIDTH}
@@ -120,7 +126,7 @@ class NotesEditor extends Component {
           onRequestChange={(isOpenEditor) => this.setState({isOpenEditor})}
         >
           <div style={styles.formWrapper}>
-           <div style={styles.formTitle}>Create a note</div>
+           <div style={styles.centered}>Create a note</div>
             <form onSubmit={this.handleSubmit}>
                <TextField
                 hintText="Write title"
