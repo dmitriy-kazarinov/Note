@@ -4,7 +4,7 @@ export default function () {
       fontWeight: 'bold'
     },
     openBtn: {
-      margin: '10px 0'
+      margin: 15
     },
     formWrapper: {
       padding: 15
@@ -12,7 +12,7 @@ export default function () {
     submitBtn: {
       marginRight: 10
     },
-    formTitle: {
+    centered: {
       textAlign: 'center'
     }
   }

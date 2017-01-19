@@ -4,6 +4,9 @@ import moment from 'moment'
 
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
+import RaisedButton from 'material-ui/RaisedButton'
+import ActionDelete from 'material-ui/svg-icons/action/delete';
+import EditorEdit from 'material-ui/svg-icons/editor/mode-edit';
 
 import getStyles from './styles'
 import { deleteNote } from 'actions/notes'
@@ -28,25 +31,41 @@ class Note extends Component {
   }
 
   componentWillMount() {
-    this.props.note.date = moment(this.props.note.date).format('L')  
+    this.props.note.date = moment(this.props.note.date).format('MM.DD.YYYY')
   }
 
   render () {
     const styles = getStyles()
 
     return (
-      <Paper style={styles.paper} zDepth={2} circle={false}>
-        <div style={styles.paperTitle}>{this.props.note.title}</div>
+      <Paper
+        style={{
+          ...styles.paper,
+          background: this.props.note.color
+        }}
+        zDepth={2}
+        circle={false}
+      >
+        <div style={styles.paperTitle}>
+          {this.props.note.title}
+        </div>
+        <div style={styles.noteElement}>
+          {this.props.note.text}
+        </div>
         <Divider />
-        <div>{this.props.note.text}</div>
-        <Divider />
-        <div>{this.props.note.date}</div>
-        <Divider />
-        <div>{this.props.note.color}</div>
-        <Divider />
-        <button onClick={this.removeNote}>
-          del
-        </button>
+        <div style={styles.noteElement}>
+          {this.props.note.date}
+        </div>
+        <RaisedButton
+          icon={<EditorEdit />}
+          style={styles.controllBtn}
+        />
+        <RaisedButton
+          icon={<ActionDelete />}
+          secondary
+          onClick={this.removeNote}
+          style={styles.controllBtn}
+        />
       </Paper>
     )
   }

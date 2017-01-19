@@ -10,7 +10,13 @@ export default function () {
     paperTitle: {
       textAlign: 'center',
       fontWeight: 'bold',
-      marginBottom: '10px'
+      marginBottom: 10
+    },
+    noteElement: {
+      margin: 10
+    },
+    controllBtn: {
+      marginRight: 10
     }
   }
 }
