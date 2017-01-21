@@ -5,6 +5,7 @@ import { loadNotes } from 'actions/notes'
 import Title from './Title'
 import NotesGrid from './NotesGrid'
 import NotesEditor from './NotesEditor'
+import Menu from './Menu'
 
 const title = 'Note motivation'
 
@@ -27,6 +28,7 @@ class App extends Component {
   render () {
     return (
       <div>
+        <Menu />
         <Title text={title} strong />
         <NotesEditor />
         <NotesGrid />
@@ -36,7 +38,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  state: PropTypes.array.isRequired,
+  state: PropTypes.object.isRequired,
   loadNotes: PropTypes.func.isRequired
 }
 

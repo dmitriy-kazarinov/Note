@@ -26,12 +26,12 @@ class NotesGrid extends Component {
 }
 
 NotesGrid.propTypes = {
-  state: PropTypes.array
+  state: PropTypes.array.isRequired
 }
 
 export default connect(
   state => ({
-    state
+    state: state.Notes
   }),
   dispatch => ({})
 )(NotesGrid)
