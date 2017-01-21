@@ -182,7 +182,7 @@ class NotesEditor extends Component {
 }
 
 NotesEditor.propTypes = {
-  state: PropTypes.array.isRequired,
+  state: PropTypes.object.isRequired,
   addNote: PropTypes.func.isRequired
 }
 

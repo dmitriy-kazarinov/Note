@@ -31,7 +31,7 @@ class Note extends Component {
   }
 
   componentWillMount() {
-    this.props.note.date = moment(this.props.note.date).format('MM.DD.YYYY')
+    this.props.note.date = moment(this.props.note.date).format('DD.MM.YYYY')
   }
 
   render () {
@@ -72,7 +72,7 @@ class Note extends Component {
 }
 
 Note.propTypes = {
-  state: PropTypes.array.isRequired,
+  state: PropTypes.object.isRequired,
   note: PropTypes.object.isRequired,
   deleteNote: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired
